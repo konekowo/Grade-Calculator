@@ -1,0 +1,270 @@
+    body {
+      background-color: rgb(10, 10, 20);
+    }
+    h3 {
+      margin-left: 10px;
+    }
+    hr {
+      position: relative;
+      top: -30px;
+    }
+    #startServerConnnect{
+      color: #28A489;
+      
+    }
+    #connectServerMessageBox{
+      opacity: 0%;
+      border-radius: 10px;
+      border: solid 1px #28A489;
+      width: 500px;
+      height: 250px;
+      position: absolute;
+      left: 50vw;
+      top: 50vh;
+      transform: translate(-50%,-50%);
+      background-color: rgb(20, 20, 30);
+      transition: all 0.2s;
+      box-shadow: 10px 10px 10px black;
+      
+    }
+    #LogInMessageBoxTitle{
+      color: #28A489;
+      
+    }
+    #LogInMessageBox{
+      opacity: 0%;
+      border-radius: 10px;
+      border: solid 1px #28A489;
+      width: 600px;
+      height: 400px;
+      position: absolute;
+      left: 50vw;
+      top: 50vh;
+      transform: translate(-50%,-50%);
+      background-color: rgb(20, 20, 30);
+      transition: all 0.2s;
+      box-shadow: 10px 10px 10px black;
+      
+    }
+    #loginSpinnerContainer{
+      opacity: 0%;
+      transition: opacity 0.2s;
+    }
+
+
+    #home-table{
+      position: absolute;
+      left: 50vw;
+      top: 50vh;
+      transform: translate(-50%, -50%);
+      opacity: 0%;
+      border-radius: 5px;
+      width: 1000px;
+      height: 600px;
+      background-color: rgb(10, 10, 20);
+      transition: opacity 0.2s;
+      -webkit-transition : -webkit-filter 1000ms ease-in-out;
+      border: solid 1px #28A489;
+      overflow-y:auto;
+      overflow-x:hidden;
+    }
+    #course-table{
+      position: absolute;
+      left: 50vw;
+      top: 52vh;
+      transform: translate(-50%, -50%);
+      opacity: 0%;
+      border-radius: 5px;
+      width: 70vw;
+      height: 65vh;
+      background-color: rgb(10, 10, 20);
+      display: none;
+      transition: opacity 0.2s;
+      -webkit-transition : -webkit-filter 1000ms ease-in-out;
+      border: solid 1px #28A489;
+      overflow-y:auto;
+      overflow-x:hidden;
+    }
+
+    .quarterStyle{
+      color:#28A489;
+      user-select: none;
+    }
+    .quarterStyle:hover{
+      color:#6edfc6;
+    }
+    .quarterStyle:active{
+      color:#257462;
+    }
+
+    .vl {
+      position: absolute;
+      left: 800px;
+      top: 0px;
+      border-left: 2px solid #28A489;
+      height: 53px;
+    }
+    .vl2 {
+      position: absolute;
+      left: 850px;
+      top: 0px;
+      border-left: 2px solid #28A489;
+      height: 53px;
+    }
+    .vl3 {
+      position: absolute;
+      left: 900px;
+      top: 0px;
+      border-left: 2px solid #28A489;
+      height: 53px;
+    }
+    .vl4 {
+      position: absolute;
+      left: 950px;
+      top: 0px;
+      border-left: 2px solid #28A489;
+      height: 53px;
+    }
+    .vl5 {
+      position: absolute;
+      left: 150px;
+      top: 0px;
+      border-left: 2px solid #28A489;
+      height: 51px;
+    }
+    .vl6 {
+      position: absolute;
+      left: 70vw;
+      transform: translate(-210px);
+      top: 0px;
+      border-left: 2px solid #28A489;
+      height: 51px;
+    }
+    .vl7 {
+      position: absolute;
+      left: 150px;
+      margin-top: -45px;
+      border-left: 2px solid #28A489;
+      height: 52px;
+    }
+    .vl8 {
+      position: absolute;
+      left: 70vw;
+      transform: translate(-210px);
+      margin-top: -45px;
+      border-left: 2px solid #28A489;
+      height: 52px;
+    }
+
+
+    input[type="password"] {
+      text-align: left;
+      font-size: 16px;
+      line-height: 24px;
+      font-family: Clash Display Semibold;
+      color: var(--black);
+      padding: 8px;
+      border-radius: 2px;
+      outline: 2px solid var(--gray);
+      cursor: pointer;
+      background: var(--light-gray);
+      transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.5), box-shadow 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.5);
+      width: fit-content;
+      margin: 8px 0 8px 0;
+      border: none;
+    }
+    
+    input[type="password"]:hover {
+      transform: translateX(5px) translateY(-5px);
+      outline: 2px solid var(--black);
+      box-shadow: -5px 5px 0 0 var(--gray), -5px 5px 0 2px var(--black);
+    }
+    
+    input[type="password"]:active {
+      box-shadow: -3px 3px 0 0 var(--gray), -3px 3px 0 2px var(--black) !important;
+      transform: translateX(2px) translateY(-2px) !important;
+      outline: 2px solid var(--black) !important;
+    }
+    
+    input[type="password"]:focus-visible {
+      transform: translateX(5px) translateY(-5px);
+      box-shadow: -5px 5px 0 0 var(--gray), -5px 5px 0 2px var(--black);
+    }
+    
+    input[type="password"].cyan:focus-visible {
+      outline: 2px solid var(--cyan-normal);
+    }
+    
+    input[type="password"].pink:focus-visible {
+      outline: 2px solid var(--pink-normal);
+    }
+    
+    input[type="password"].yellow:focus-visible {
+      outline: 2px solid var(--yellow-normal);
+    }
+    
+    input[type="password"].blue:focus-visible {
+      outline: 2px solid var(--blue-normal);
+    }
+    
+    input[type="password"].purple:focus-visible {
+      outline: 2px solid var(--purple-normal);
+    }
+    
+    input[type="password"]:disabled, 
+    input[type="password"]:disabled:hover, input[type="password"]:disabled:active, input[type="password"]:disabled:focus-visible {
+      background: var(--white);
+      color: var(--gray);	
+      transform: none !important;
+      box-shadow: none !important;
+      outline: 2px solid var(--gray) !important;
+      cursor: not-allowed;
+    }
+    
+    input[type="password"]:read-only:focus-visible {
+      outline: 2px solid var(--black);
+    }
+    
+    input[type="password"]:disabled::placeholder {
+      color: var(--gray);
+    }
+    
+
+
+
+    /*Load Spinner Circle*/
+          .spinner {
+            animation: rotate 2s linear infinite;
+            z-index: 2;
+            position: relative;
+            top: 30%;
+            left: 50%;
+            margin: -25px 0 0 -25px;
+            width: 50px;
+            height: 50px;
+          }
+          .spinner .path {
+            stroke: #28A489;
+            stroke-linecap: round;
+            animation: dash 1.5s ease-in-out infinite;
+          }
+          @keyframes rotate {
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+          @keyframes dash {
+            0% {
+              stroke-dasharray: 1, 150;
+              stroke-dashoffset: 0;
+            }
+            50% {
+              stroke-dasharray: 90, 150;
+              stroke-dashoffset: -35;
+            }
+            100% {
+              stroke-dasharray: 90, 150;
+              stroke-dashoffset: -124;
+            }
+          }
+          

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kone's Grade Calculator</title>
+  <link href="./bounce.css" rel="stylesheet" type="text/css"/>
+  <link href="./style.css" rel="stylesheet" type="text/css"/>
+  <script src="./js.cookie.js"></script>
+  <script src="./socket.io.js"></script>
+  <script src="./index.js"></script>
+</head>
+<body>
+  <h3 style="color: #28A489">kone's Grade Calculator v2</h3>
+  <h5 style="color: #28A489; width: 600px; position: absolute; top:15px; left: 100vw; transform: translateX(-100%); opacity: 0%; transition: opacity 0.2s;" id="loginName">Logged In As</h5>
+  <hr class="cyan">
+  <h3 style="color: #28A489; transition: opacity 0.2s; opacity: 0%; display: none; margin-top: -50px;" id="CourseNameDisplay">Course: </h3>
+  <h4 style="color: #28A489; transition: opacity 0.2s; opacity: 0%; display: none; margin-left: 10px; margin-top: -10px;" id="TeacherNameDisplay">Teacher: </h4>
+  
+  <div id="course-table">
+    <div id="top-bar-table-home" style="height:52px;">
+      <h4 style="color: #28A489; margin-left: 10px;">Catagory</h4>
+      <div class="vl5"></div>
+      <h4 style="color: #28A489; margin-left: 160px; margin-top: -47px;">Assignment Name</h4>
+      <div class="vl6"></div>
+      <h4 style="color: #28A489; margin-left: 70vw; margin-top: -48px; transform: translate(-200px);">Grade</h4>
+      <hr class="cyan" style="margin: 0px; margin-top: 30px;">
+    </div>
+  </div>
+
+  <div id="home-table">
+    <div id="top-bar-table-home" style="height:52px;">
+      <h4 style="color: #28A489; margin-left: 10px;">Course Name</h4>
+      <div class="vl"></div>
+      <h4 style="color: #28A489; margin-left: 812px; margin-top: -45px;">Q1</h4>
+      <div class="vl2"></div>
+      <h4 style="color: #28A489; margin-left: 860px; margin-top: -48px;">Q2</h4>
+      <div class="vl3"></div>
+      <h4 style="color: #28A489; margin-left: 910px; margin-top: -48px;">Q3</h4>
+      <div class="vl4"></div> 
+      <h4 style="color: #28A489; margin-left: 958px; margin-top: -48px;">Q4</h4>
+      <hr class="cyan" style="margin: 0px; margin-top: 30px;">
+    </div>
+  </div>
+
+  
+
+
+  <div id="connectServerMessageBox">
+    <h3 id="startServerConnnect">Connecting to server...</h3>
+      <svg class="spinner" viewBox="0 0 50 50">
+        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+      </svg>
+  </div>
+  <div id="LogInMessageBox">
+    <h3 id="LogInMessageBoxTitle">Log in to NCEdCloud RapidIdentity</h3>
+    
+      <h4 style="color: #28A489; text-align: center;">Student ID:</h4>
+      <input type="text" id="RapidUsername" name="RapidUsername" class="cyan" placeholder="Student ID" style="background-color: black; outline: 2px solid #28A489; color: white; position: relative; left: 34%; "><br>
+      <h4 style="color: #28A489; text-align: center;">Password:</h4>
+      <input type="password" id="RapidPassword" name="RapidPassword" class="cyan" placeholder="Password" style="background-color: black; outline: 2px solid #28A489; color: white; position: relative; left: 34%; "><br>
+      <button class="cyan" style="position: relative; left: 42%;" id="submitStudentId">Submit</button>
+      
+      <div id="loginSpinnerContainer" style="margin-top:50px;">
+        
+        <svg class="spinner" viewBox="0 0 50 50" style="top:40%;left:50%;">
+          <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+        </svg>
+        
+      </div>
+      <h5 style="color: #28A489; text-align: center; transition: opacity 0.2s; opacity: 100%;" >Logging in will take 5 to 40 seconds</h5>
+      <h5 style="color: #AB4787; text-align: center; transition: opacity 0.2s; opacity: 0%;" id="StudentIDError">Invalid Student ID or Password</h5>
+  </div>
+  <div style="position:absolute;width:100vw;height:100vh;top:0px;left:0px;display:none;opacity: 0%;transition: opacity 0.2s;" id="fullScreenLoad">
+    <h3 style="color: #28A489; text-align: center; margin-top: 300px;">Re-Logging In and fetching Grades...</h3>
+    <h3 style="color: #28A489; text-align: center;">This will take 10 to 40 seconds</h3>
+    <svg class="spinner" viewBox="0 0 50 50" style="top:5%;left:50%;">
+      <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+    </svg>
+  </div>
+</body>
+</html>

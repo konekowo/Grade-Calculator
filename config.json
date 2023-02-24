@@ -1,0 +1,9 @@
+{
+    "pathToFirefoxExecutable": "C:/Program Files/Mozilla Firefox/firefox.exe",
+    "port": 3000,
+    "schoolDistrictAbbreviation": "cms",
+    "schoolDistrictName": "Charlotte Mecklenburg Schools",
+    "loginPortalName": "NCEdCloud RapidIdentity",
+    "loginPortalLink": "https://my.ncedcloud.org/portal/applications/access?id=204c4610-363e-11e5-afe9-123ff21da58d",
+    "showBrowser": false
+}
