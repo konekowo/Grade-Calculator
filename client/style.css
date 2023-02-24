@@ -1,5 +1,6 @@
     body {
       background-color: rgb(10, 10, 20);
+      overflow-x: hidden;
     }
     h3 {
       margin-left: 10px;
@@ -53,10 +54,9 @@
 
 
     #home-table{
-      position: absolute;
+      position: relative;
       left: 50vw;
-      top: 50vh;
-      transform: translate(-50%, -50%);
+      transform: translateX(-50%);
       opacity: 0%;
       border-radius: 5px;
       width: 1000px;
@@ -69,10 +69,10 @@
       overflow-x:hidden;
     }
     #course-table{
-      position: absolute;
+      position: relative;
+      margin-top: 150px;
       left: 50vw;
-      top: 52vh;
-      transform: translate(-50%, -50%);
+      transform: translateX(-50%);
       opacity: 0%;
       border-radius: 5px;
       width: 70vw;
