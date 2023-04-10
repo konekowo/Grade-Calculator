@@ -1,5 +1,5 @@
 {
-    "pathToFirefoxExecutable": "/nix/store/s882q4kczpn365n34v8vsk8indwi75q7-firefox-107.0.1/bin/firefox",
+    "pathToFirefoxExecutable": "C:/Program Files/Mozilla Firefox/firefox.exe",
     "port": 3000,
     "schoolDistrictAbbreviation": "cms",
     "schoolDistrictName": "Charlotte Mecklenburg Schools",

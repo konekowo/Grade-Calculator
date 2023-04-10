@@ -56,7 +56,8 @@ function loginAndFetchGrades(studentID, password, io, socket, quarter, course) {
       await page.waitForSelector("#quickLookup > table.linkDescList.grid > tbody > tr:nth-child(" + course + ") > td:nth-child(" + quarter + ") > a");
       await page.click("#quickLookup > table.linkDescList.grid > tbody > tr:nth-child(" + course + ") > td:nth-child(" + quarter + ") > a");
 
-      await delay(300000);
+      await delay(10000);
+      await page.waitForSelector('#parentPageTemp');
       await page.waitForSelector("#validationIcons > em.tt-info.ps-icon.ps-info-inverse");
 
 

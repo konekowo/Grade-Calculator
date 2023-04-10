@@ -7,12 +7,14 @@ const io = new Server(server);
 const browserLogin = require('./login');
 const config = require('../config.json');
 const fetchGrades = require('./fetchGrades');
-
+const canyonsbrowserLogin = require('./CanyonsSchoolDistrict/login');
+const canyonsfetchGrades = require('./CanyonsSchoolDistrict/fetchGrades');
 
 
 app.use(express.static('client'));
 
 io.on('connection', (socket) => {
+    let schoolDist = "";
     // User connected
     console.log('A user connected socketID = ' + socket.id);
     setTimeout(() => {
@@ -23,13 +25,24 @@ io.on('connection', (socket) => {
         // User disconnected
         console.log('A user disconnected socket id = ' + socket.id);
     });
+    socket.on('schoolDist', (msg) => {
+        schoolDist = msg;
+        //console.log(msg);
+    });
     socket.on('studentID', (msg) => {
         // when user submits their student ID and Password
         io.to(socket.id).emit('usernameProceed', 'next');
         let uncutmessagearray = msg.split("✅");
         let studentID = uncutmessagearray[0];
         let Password = uncutmessagearray[1];
-        browserLogin.initLogin(studentID, Password, io, socket);
+        //console.log(schoolDist)
+        if (schoolDist == "cms"){
+            browserLogin.initLogin(studentID, Password, io, socket);
+        }
+        else if (schoolDist == "canyonSchoolDistrict"){
+            canyonsbrowserLogin.initLogin(studentID, Password, io, socket);
+        }
+        
 
     });
     socket.on('courseChoose', (msg) => {
@@ -38,7 +51,14 @@ io.on('connection', (socket) => {
         let Password = uncutmessagearray[3];
         let quarter = uncutmessagearray[0];
         let course = uncutmessagearray[1];
-        fetchGrades.loginAndFetchGrades(studentID, Password, io, socket, quarter, course);
+        if (schoolDist == "cms"){
+            fetchGrades.loginAndFetchGrades(studentID, Password, io, socket, quarter, course);
+        }
+        else if (schoolDist == "canyonSchoolDistrict"){
+            canyonsfetchGrades.loginAndFetchGrades(studentID, Password, io, socket, quarter, course);
+        }
+
+        
     });
 });  
 

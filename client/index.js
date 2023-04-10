@@ -1,5 +1,34 @@
 window.addEventListener('DOMContentLoaded', (event) => {
   let socket = io();
+
+  let numprepare = [];
+  let numrehearse = [];
+  let numperform = [];
+
+  let schoolDistrict = getSchoolDistrict();
+  socket.emit('schoolDist', schoolDistrict);
+  console.log(schoolDistrict);
+
+  document.getElementById('closeButtonEdit').addEventListener('click', () =>{
+    let EditAssignmentBox = document.getElementById("EditAssignmentBox");
+      EditAssignmentBox.style.opacity = "0%";
+      EditAssignmentBox.style.width = "600px";
+      EditAssignmentBox.style.height = "400px";
+      setTimeout(() => {
+        document.getElementById("DisableButtons").style.display = "none";
+      }, 200);
+  });
+
+  socket.on('connect_error', () => {
+    document.getElementById("connectServerMessageBox").style.display = "block";
+    document.getElementById("startServerConnnect").innerText = "The server probably crashed. Reconnecting...";
+    setTimeout(() => {
+      document.getElementById("connectServerMessageBox").style.opacity = "100%";
+      document.getElementById("connectServerMessageBox").style.width = "600px";
+      document.getElementById("connectServerMessageBox").style.height = "300px";
+    },1000);
+    
+  });
   
   setTimeout(() => {
     document.getElementById("connectServerMessageBox").style.opacity = "100%";
@@ -272,6 +301,138 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     assignmentDiv.appendChild(assignementGrade);
 
+    let assignmentEditButton = document.createElement("button");
+    assignmentEditButton.style.position = "relative";
+    assignmentEditButton.style.zIndex = "100";
+    if (assignGrade != ""){
+      assignmentEditButton.style.top = "-46px";
+    }
+    else{
+      assignmentEditButton.style.top = "-6px";
+    }
+    
+    assignmentEditButton.style.left = "100%";
+    assignmentEditButton.style.transform = "translateX(-120%)";
+    assignmentEditButton.innerText = "Edit";
+    assignmentEditButton.className = "cyan";
+    assignmentEditButton.disabled = "true";
+    assignmentDiv.appendChild(assignmentEditButton);
+
+    assignmentEditButton.addEventListener("mouseover", () => {
+      assignmentEditButton.style.transform = "translate(-115%, -5px)";
+    });
+    assignmentEditButton.addEventListener("mouseout", () => {
+      assignmentEditButton.style.transform = "translateX(-120%)";
+    });
+
+    assignmentEditButton.addEventListener("mousedown", () => {
+      assignmentEditButton.style.transform = "translate(-118%, -2px)";
+    });
+    assignmentEditButton.addEventListener("mouseup", () => {
+      assignmentEditButton.style.transform = "translateX(-120%)";
+    });
+
+
+    assignmentEditButton.addEventListener("click",() => {
+      let EditAssignmentBox = document.getElementById("EditAssignmentBox");
+      document.getElementById("DisableButtons").style.display = "block";
+      setTimeout(() => {
+        EditAssignmentBox.style.opacity = "100%";
+        EditAssignmentBox.style.width = "700px";
+        EditAssignmentBox.style.height = "500px";
+      }, 200);
+
+      document.getElementById("AssignmentNameTextBox").placeholder = assignName;
+      if (assignGrade != ""){
+        document.getElementById("AssignmentGradeTextBox").placeholder = assignGrade;
+      }
+      else{
+        document.getElementById("AssignmentGradeTextBox").placeholder = "100";
+      }
+      let weightIndex;
+
+      if (assignWeight == "Prepare"){
+        weightIndex = "0";
+      }
+      else if (assignWeight == "Rehearse"){
+        weightIndex = "1";
+      }
+      else {
+        weightIndex = "2";
+      }
+
+      document.getElementById("AssignmentWeightDropdown").selectedIndex = weightIndex;
+      
+      function saveAssignmentEdits(){
+        document.getElementById("doneEditAssignment").removeEventListener("click", saveAssignmentEdits, true);
+        let editedName = document.getElementById("AssignmentNameTextBox").value;
+        let editedGrade = document.getElementById("AssignmentGradeTextBox").value;
+        let editedWeight = document.getElementById("AssignmentWeightDropdown").selectedIndex;
+        assignementName.innerText = editedName;
+        assignementGrade.innerText = editedGrade;
+        let weightName;
+        if (editedWeight == "0"){
+          weightName = "Prepare";
+        }
+        else if (editedWeight == "1"){
+          weightName = "Rehearse";
+        }
+        else {
+          weightName = "Perform";
+        }
+
+        assignmentWeight.innerText = weightName;
+
+        if (weightName != assignWeight){
+          if (assignWeight == "Prepare"){
+            for (let i = 0; i < numprepare.length; i++) {
+              if (numprepare[i] == assignGrade) {
+                numprepare[i] = "";
+                break;
+              }
+            }
+
+          }
+          else if (assignWeight == "Rehearse"){
+            for (let i = 0; i < numrehearse.length; i++) {
+              if (numrehearse[i] == assignGrade) {
+                numrehearse[i] = "";
+                break;
+              }
+            }
+          }
+          else {
+            for (let i = 0; i < numperform.length; i++) {
+              if (numperform[i] == assignGrade) {
+                numperform[i] = "";
+                break;
+              }
+            }
+          }
+
+          if (weightName == "Prepare"){
+            numprepare.push(editedGrade);
+          }
+          else if (weightName == "Rehearse"){
+            numrehearse.push(editedGrade);
+          }
+          else {
+            numperform.push(editedGrade);
+          }
+
+          calculateGrades(numprepare, numrehearse, numperform, "FinalGradeDisplay");
+          
+        }
+
+      }
+
+
+      document.getElementById("doneEditAssignment").addEventListener("click", saveAssignmentEdits());
+      
+
+      
+      
+    });
   }
   
   
@@ -307,9 +468,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
     console.log(msg);
     let courseNameFromServer = msg[0];
     let teacherNameFromServer = msg[1];
+
     let NumPrepare = [];
     let NumRehearse = [];
     let NumPerform = [];
+
     let NamePrepare = [];
     let NameRehearse = [];
     let NamePerform = [];
@@ -344,16 +507,102 @@ window.addEventListener('DOMContentLoaded', (event) => {
       document.getElementById("home-table").style.display = "none";
       document.getElementById("course-table").style.display = "block";
       document.getElementById("course-table").style.opacity = "100%";
-      document.getElementById("CourseNameDisplay").innerText = "Course: "+msg[0];
-      document.getElementById("TeacherNameDisplay").innerText = "Teacher: "+msg[1];
+      document.getElementById("CourseNameDisplay").innerText = "Course: "+courseNameFromServer;
+      document.getElementById("TeacherNameDisplay").innerText = "Teacher: "+teacherNameFromServer;
       document.getElementById("CourseNameDisplay").style.display = "block";
       document.getElementById("TeacherNameDisplay").style.display = "block";
+      document.getElementById("FinalGradeDisplay").style.opacity = "100%";
+      document.getElementById("FinalGradeDisplay").style.display = "block";
       document.getElementById("CourseNameDisplay").style.opacity = "100%";
       document.getElementById("TeacherNameDisplay").style.opacity = "100%";
+      document.getElementById("makeNewAssignmentButton").style.display = "block";
+      numprepare = NumPrepare;
+      numrehearse = NumRehearse;
+      numperform = NumPerform;
+      calculateGrades(numprepare, numrehearse, numperform, "FinalGradeDisplay");
+      document.getElementById("makeNewAssignmentButton").addEventListener('click', () => {
+        let NewAssignmentBox = document.getElementById("NewAssignmentBox");
+        document.getElementById("DisableButtons2").style.display = "block";
+        setTimeout(() => {
+          NewAssignmentBox.style.opacity = "100%";
+          NewAssignmentBox.style.width = "700px";
+          NewAssignmentBox.style.height = "500px";
+        }, 200);
+      });
+
+      document.getElementById("doneNewAssignment").addEventListener('click', () => {
+        inputNewGrade();
+        let NewAssignmentBox = document.getElementById("NewAssignmentBox");
+        NewAssignmentBox.style.opacity = "0%";
+        NewAssignmentBox.style.width = "600px";
+        NewAssignmentBox.style.height = "400px";
+        setTimeout(() => {
+          document.getElementById("DisableButtons2").style.display = "none";
+        }, 200);
+      });
+
+      document.getElementById("closeButtonNewAssignment").addEventListener('click', () => {
+        let NewAssignmentBox = document.getElementById("NewAssignmentBox");
+        NewAssignmentBox.style.opacity = "0%";
+        NewAssignmentBox.style.width = "600px";
+        NewAssignmentBox.style.height = "400px";
+        setTimeout(() => {
+          document.getElementById("DisableButtons2").style.display = "none";
+          document.getElementById("NewAssignmentNameTextBox").value = "";
+          document.getElementById("NewAssignmentGradeTextBox").value = "";
+          document.getElementById("NewAssignmentWeightDropdown").selectedIndex = "0";
+        }, 200);
+      });
+
     }, 1000);
   });
 
 
+  function inputNewGrade(){
+        let newName = document.getElementById("NewAssignmentNameTextBox").value;
+        let newGrade = document.getElementById("NewAssignmentGradeTextBox").value;
+        let newWeight = document.getElementById("NewAssignmentWeightDropdown").selectedIndex;
+        let weightName;
+        if (newWeight == "0"){
+          weightName = "Prepare";
+        }
+        else if (newWeight == "1"){
+          weightName = "Rehearse";
+        }
+        else {
+          weightName = "Perform";
+        }
+
+        if (newName == ""){
+          newName = "New Assignment";
+        }
+        if (newGrade == ""){
+          newGrade = "100";
+        }
+
+
+        switch (weightName){
+          case "Prepare":
+            numprepare.push(newGrade);
+            break;
+          case "Rehearse":
+            numrehearse.push(newGrade);
+            break;
+          case "Perform":
+            numperform.push(newGrade);
+            break;
+        }
+
+        createAssignment(newName, weightName, newGrade);
+
+
+
+        calculateGrades(numprepare, numrehearse, numperform, "FinalGradeDisplay");
+        document.getElementById("NewAssignmentNameTextBox").value = "";
+        document.getElementById("NewAssignmentGradeTextBox").value = "";
+        document.getElementById("NewAssignmentWeightDropdown").selectedIndex = "0";
+
+  }
 
 
   socket.on('login-error', (msg) => {

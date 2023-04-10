@@ -70,7 +70,6 @@
     }
     #course-table{
       position: relative;
-      margin-top: 150px;
       left: 50vw;
       transform: translateX(-50%);
       opacity: 0%;
@@ -233,38 +232,194 @@
 
 
     /*Load Spinner Circle*/
-          .spinner {
-            animation: rotate 2s linear infinite;
-            z-index: 2;
-            position: relative;
-            top: 30%;
-            left: 50%;
-            margin: -25px 0 0 -25px;
-            width: 50px;
-            height: 50px;
-          }
-          .spinner .path {
-            stroke: #28A489;
-            stroke-linecap: round;
-            animation: dash 1.5s ease-in-out infinite;
-          }
-          @keyframes rotate {
-            100% {
-              transform: rotate(360deg);
-            }
-          }
-          @keyframes dash {
-            0% {
-              stroke-dasharray: 1, 150;
-              stroke-dashoffset: 0;
-            }
-            50% {
-              stroke-dasharray: 90, 150;
-              stroke-dashoffset: -35;
-            }
-            100% {
-              stroke-dasharray: 90, 150;
-              stroke-dashoffset: -124;
-            }
-          }
+.spinner {
+  animation: rotate 2s linear infinite;
+  z-index: 2;
+  position: relative;
+  top: 30%;
+  left: 50%;
+  margin: -25px 0 0 -25px;
+  width: 50px;
+  height: 50px;
+}
+.spinner .path {
+  stroke: #28A489;
+  stroke-linecap: round;
+  animation: dash 1.5s ease-in-out infinite;
+}
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
           
+
+
+#DisableButtons{
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+}
+
+#DisableButtons2{
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+}
+
+#EditAssignmentBox{
+  opacity: 0%;
+  border-radius: 10px;
+  border: solid 1px #28A489;
+  width: 600px;
+  height: 400px;
+  position: absolute;
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%,-50%);
+  background-color: rgb(20, 20, 30);
+  transition: all 0.2s;
+  box-shadow: 10px 10px 10px black;
+  overflow: hidden;
+}
+
+#EditAssignmentBoxTitle{
+  color: #28A489;
+  
+}
+
+#closeButtonEdit{
+  position: absolute;
+  left: 608px;
+}
+
+#AssignmentGradeTextBox{
+  text-align: left;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: Clash Display Semibold;
+  color: var(--black);
+  padding: 8px;
+  border-radius: 2px;
+  outline: 2px solid var(--gray);
+  cursor: pointer;
+  background: var(--light-gray);
+  transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.5), box-shadow 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.5);
+  width: 236px;
+  margin: 8px 0 8px 0;
+  border: none;
+  outline: 2px solid var(--cyan-normal);
+  
+  
+  
+}
+
+#AssignmentGradeTextBox:hover {
+  transform: translateX(5px) translateY(-5px);
+  outline: 2px solid var(--black);
+  box-shadow: -5px 5px 0 0 var(--gray), -5px 5px 0 2px var(--black);
+}
+
+#AssignmentGradeTextBox:active {
+  box-shadow: -3px 3px 0 0 var(--gray), -3px 3px 0 2px var(--black) !important;
+  transform: translateX(2px) translateY(-2px) !important;
+  outline: 2px solid var(--black) !important;
+}
+
+#AssignmentWeightDropdown{
+    background-color: black;
+    color: white;
+    position: relative;
+    left: 33.5%;
+    width: 239px;
+    outline: 2px solid #28A489;
+}
+
+/**/
+#NewAssignmentBox{
+  opacity: 0%;
+  border-radius: 10px;
+  border: solid 1px #28A489;
+  width: 600px;
+  height: 400px;
+  position: absolute;
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%,-50%);
+  background-color: rgb(20, 20, 30);
+  transition: all 0.2s;
+  box-shadow: 10px 10px 10px black;
+  overflow: hidden;
+}
+
+#NewAssignmentBoxTitle{
+  color: #28A489;
+  
+}
+
+#closeButtonNewAssignment{
+  position: absolute;
+  left: 608px;
+}
+
+#NewAssignmentGradeTextBox{
+  text-align: left;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: Clash Display Semibold;
+  color: var(--black);
+  padding: 8px;
+  border-radius: 2px;
+  outline: 2px solid var(--gray);
+  cursor: pointer;
+  background: var(--light-gray);
+  transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.5), box-shadow 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.5);
+  width: 236px;
+  margin: 8px 0 8px 0;
+  border: none;
+  outline: 2px solid var(--cyan-normal);
+  
+  
+  
+}
+
+#NewAssignmentGradeTextBox:hover {
+  transform: translateX(5px) translateY(-5px);
+  outline: 2px solid var(--black);
+  box-shadow: -5px 5px 0 0 var(--gray), -5px 5px 0 2px var(--black);
+}
+
+#NewAssignmentGradeTextBox:active {
+  box-shadow: -3px 3px 0 0 var(--gray), -3px 3px 0 2px var(--black) !important;
+  transform: translateX(2px) translateY(-2px) !important;
+  outline: 2px solid var(--black) !important;
+}
+
+#NewAssignmentWeightDropdown{
+    background-color: black;
+    color: white;
+    position: relative;
+    left: 33.5%;
+    width: 239px;
+    outline: 2px solid #28A489;
+}
